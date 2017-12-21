@@ -268,7 +268,7 @@ function setPosition(position, duration = 0){
 	}
 }
 
-function MScroll(el, options){
+function MobileScroll(el, options){
 	this.wrapper = typeof el === 'string' ? document.querySelector(el) : el;
 	this.scroller = this.wrapper.children[0];
 	this.deceleration = options.deceleration || 0.006;	//参考减速度
@@ -296,7 +296,7 @@ function MScroll(el, options){
 	init.call(this);
 }
 
-MScroll.prototype.to = function(position, v, time, deceleration, direction){
+MobileScroll.prototype.to = function(position, v, time, deceleration, direction){
 	var beginTime = new Date();
 	var _position = this.getPosition();
 	var self = this;
@@ -318,17 +318,17 @@ MScroll.prototype.to = function(position, v, time, deceleration, direction){
 	_to();
 }
 
-MScroll.prototype.getPosition = function(){
+MobileScroll.prototype.getPosition = function(){
 	return getTransform(this.scroller);
 }
 
-MScroll.prototype.getComputedPosition = function(d){
+MobileScroll.prototype.getComputedPosition = function(d){
 	var position = this.getPosition();
 	position[this.property] += d;
 	return position;
 }
 
-MScroll.prototype.slideTo = function(i, duration){
+MobileScroll.prototype.slideTo = function(i, duration){
 	if(i === undefined || !this.step) return;
 	var d = -this.step * i;
 	var position = this.getPosition();
@@ -336,13 +336,13 @@ MScroll.prototype.slideTo = function(i, duration){
 	setPosition.call(this, position, duration);
 }
 
-MScroll.prototype.getIndex = function(){
+MobileScroll.prototype.getIndex = function(){
 	if(!this.step) return;
 	var position = this.getPosition();
 	return Math.round(Math.abs(position[this.property]) / this.step);
 }
 
-MScroll.prototype.fixLoop = function(){
+MobileScroll.prototype.fixLoop = function(){
 	var index = this.getIndex();
 	if(index === 0){
 		this.slideTo(this.itemLength - 2);
@@ -351,7 +351,7 @@ MScroll.prototype.fixLoop = function(){
 	}
 }
 
-MScroll.prototype.startAutoPlay = function(interval, speed, direction = 1){
+MobileScroll.prototype.startAutoPlay = function(interval, speed, direction = 1){
 	if(interval <= speed){
 		console.log('error:---interval need to be greater than speed---');
 		return;
@@ -363,26 +363,26 @@ MScroll.prototype.startAutoPlay = function(interval, speed, direction = 1){
 	}, interval)
 }
 
-MScroll.prototype.stopAutoPlay = function(){
+MobileScroll.prototype.stopAutoPlay = function(){
 	if(!this.autoPlayID) return;
 	clearInterval(this.autoPlayID);
 	this.autoPlayID = undefined;
 }
 
-MScroll.prototype.pause = function(){
+MobileScroll.prototype.pause = function(){
 	this.scroller.style.transitionDuration = '0';
 }
 
-MScroll.prototype.updateOptions = function(options){
+MobileScroll.prototype.updateOptions = function(options){
 	for(let property in options){
 		if(properties.indexOf(property) == -1) continue;
 		this[property] = options[property];
 	}
 }
 
-MScroll.properties = ['deceleration', 'noBounce', 'wheel', 'slide', 'loop', 'noOutOfBounds', 'step', 'name', 'vertical', 'max', 'min']
+MobileScroll.properties = ['deceleration', 'noBounce', 'wheel', 'slide', 'loop', 'noOutOfBounds', 'step', 'name', 'vertical', 'max', 'min']
 
-MScroll.prototype.destory = function(){
+MobileScroll.prototype.destory = function(){
 	this.stopAutoPlay();
 	this.wrapper.removeEventListener('touchstart', this.startHandler);
 	this.wrapper.removeEventListener('touchmove', this.moveHandler);
@@ -390,7 +390,7 @@ MScroll.prototype.destory = function(){
 } 
 
 if(typeof module == 'undefined' && typeof exports == 'object'){
-	module.exports = MScroll;
+	module.exports = MobileScroll;
 } else {
-	window.MScroll = MScroll;
+	window.MobileScroll = MobileScroll;
 }

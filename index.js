@@ -17,6 +17,8 @@
 	}
 })(global || window);
 
+const properties = ['deceleration', 'noBounce', 'wheel', 'slide', 'loop', 'noOutOfBounds', 'step', 'name', 'vertical', 'max', 'min']
+
 function eventExtend(instance){
 	instance.events = []
 	
@@ -380,8 +382,6 @@ MobileScroll.prototype.updateOptions = function(options){
 	}
 }
 
-MobileScroll.properties = ['deceleration', 'noBounce', 'wheel', 'slide', 'loop', 'noOutOfBounds', 'step', 'name', 'vertical', 'max', 'min']
-
 MobileScroll.prototype.destory = function(){
 	this.stopAutoPlay();
 	this.wrapper.removeEventListener('touchstart', this.startHandler);
@@ -389,7 +389,7 @@ MobileScroll.prototype.destory = function(){
 	this.wrapper.removeEventListener('touchend', this.endHandler);
 } 
 
-if(typeof module == 'undefined' && typeof exports == 'object'){
+if(typeof module !== 'undefined' && typeof exports === 'object'){
 	module.exports = MobileScroll;
 } else {
 	window.MobileScroll = MobileScroll;

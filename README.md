@@ -3,12 +3,12 @@ A small tool for smooth and easy touch in mobile device;
 
 ## **Install**
 
-npm install mobilescroll
+npm install mobilescroll --save
 
 ## **Usage**
 
 ```
-new MobileScroll('.wrapper', //外层包装，可为选择器或者dom元素
+new MobileScroll('.wrapper', //selector or dom 外层包装，可为选择器或者dom元素
 {
         
     deceleration: 0.006, //参考加速度，可选，默认为0.006
@@ -25,7 +25,10 @@ new MobileScroll('.wrapper', //外层包装，可为选择器或者dom元素
     max: 0     //最大运动值，必填
 })
 ```
+```
+<script src="mobile-scroll.js"></script>
 
+```
 ```
 <div class="wrapper">
     <div class="scroller">

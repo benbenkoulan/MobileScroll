@@ -1,8 +1,6 @@
 # MobileScroll
 A small tool for smooth and easy touch in mobile device;
 
-一个方便在移动端流畅简易滑动的工具
-
 ## **Install**
 
 npm install mobilescroll
@@ -92,7 +90,7 @@ new MobileScroll('.wrapper', //外层包装，可为选择器或者dom元素
 
 ---
 ### 
-events
+### events
 
 #### touchstart
 #### touchmove

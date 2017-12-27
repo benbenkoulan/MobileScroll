@@ -46,7 +46,7 @@ function start(e){
 	this.directionLocked = '';
 	this.isLocked = false;
 
-	this.emit('moveStart');
+	this.emit('start');
 }
 
 function move(e){

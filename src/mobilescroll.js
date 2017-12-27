@@ -19,7 +19,7 @@ export default class MobileScroll extends Observer {
 		this.slide = !!options.slide;	//滑动
 		this.loop = !!options.loop;		//循环
 		this.step = options.step;
-		this.bounceThreshold = 0.5;	//弹性的阀值
+		this.bounceThreshold = options.bounceThreshold || 0.5;	//弹性的阀值
 
 		this.name = options.name;
 

@@ -20,6 +20,7 @@ new MobileScroll('.wrapper', //selector or dom 外层包装，可为选择器或
     step: 200,      //步长，可选
     name: 'mscroll',    //名称，可选
     vertical: true,     //是否垂直方向，可选，默认为false
+    bounceThreshold: 0.5,//弹性的阀值，可选，默认为0.5
     min: -100,  //最小运动值，必填
     max: 0     //最大运动值，必填
 })
@@ -94,12 +95,12 @@ new MobileScroll('.wrapper', //selector or dom 外层包装，可为选择器或
 ### 
 ### events
 
-#### touchstart
-#### touchmove
-#### touchend
+#### moveStart
+#### move
+#### moveEnd
 
 ```
-mobilescroll.on('touchstart', function(){
+mobilescroll.on('moveStart', function(){
     //note that the context 'this' is point to mobilescroll
 })
 ```

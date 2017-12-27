@@ -18,7 +18,6 @@ new MobileScroll('.wrapper', //selector or dom 外层包装，可为选择器或
     slide: true,    //惯性效果，可选，默认为false
     loop: true,     //是否循环，可选，默认为false,
     step: 200,      //步长，可选
-    bounceThreshold: 0.5,   //弹性阀值，可选，默认为0.5
     name: 'mscroll',    //名称，可选
     vertical: true,     //是否垂直方向，可选，默认为false
     min: -100,  //最小运动值，必填

@@ -46,7 +46,7 @@ function start(e){
 	this.directionLocked = '';
 	this.isLocked = false;
 
-	this.trigger('moveStart');
+	this.emit('moveStart');
 }
 
 function move(e){
@@ -94,7 +94,7 @@ function move(e){
 			delta = position[this.property] - _position[this.property];
 		}
 		setPosition.call(this, position);
-		this.trigger('move', delta);
+		this.emit('move', delta);
 	}
 }
 
@@ -164,7 +164,7 @@ export function init(){
 	var self = this;
 	var transitionHandler = function(e){
 		if(e.target === self.scroller){
-			self.trigger('moveEnd');
+			self.emit('moveEnd');
 		}
 	}
 	this.scroller.addEventListener('transitionend', transitionHandler);

@@ -1,1 +1,1 @@
-module.exports = require('./src/mobilescroll')
+module.exports = require('./src/mobilescroll').default;

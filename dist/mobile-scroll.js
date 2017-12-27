@@ -2,7 +2,7 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define([], factory);
+		define("MobileScroll", [], factory);
 	else if(typeof exports === 'object')
 		exports["MobileScroll"] = factory();
 	else
@@ -133,7 +133,7 @@ function getTransform(dom) {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(3);
+module.exports = __webpack_require__(3).default;
 
 /***/ }),
 /* 3 */

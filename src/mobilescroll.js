@@ -124,6 +124,6 @@ MobileScroll.prototype.destory = function(){
 	this.wrapper.removeEventListener('touchstart', this.startHandler);
 	this.wrapper.removeEventListener('touchmove', this.moveHandler);
 	this.wrapper.removeEventListener('touchend', this.endHandler);
-} 
+}
 
 export default MobileScroll;

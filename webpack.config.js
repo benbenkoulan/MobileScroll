@@ -6,7 +6,8 @@ module.exports = {
 		path: path.resolve(__dirname, './dist'),
 		filename: 'mobile-scroll.js',
 		library: 'MobileScroll',
-      	libraryTarget: 'umd'
+      	libraryTarget: 'umd',
+      	umdNamedDefine: true
 	},
 	module: {
 		rules: [{

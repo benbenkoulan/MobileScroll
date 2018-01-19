@@ -8,21 +8,21 @@ npm install mobilescroll --save
 ## **Usage**
 
 ```
-new MobileScroll('.wrapper', //selector or dom 外层包装，可为选择器或者dom元素
+new MobileScroll('.wrapper', //selector or dom element of the wrapper
 {
         
-    deceleration: 0.006, //参考加速度，可选，默认为0.006
-    noOutOfBounds: true, //禁止越界标志，可选，默认为false
-    noBounce: true, //禁止单性效果，可选，默认为false
-    wheel: true,    //滚动轮效果，可选，默认为false
-    slide: true,    //惯性效果，可选，默认为false
-    loop: true,     //是否循环，可选，默认为false,
-    step: 200,      //步长，可选
-    name: 'mscroll',    //名称，可选
-    vertical: true,     //是否垂直方向，可选，默认为false
-    bounceThreshold: 0.5,//弹性的阀值，可选，默认为0.5
-    min: -100,  //最小运动值，必填
-    max: 0     //最大运动值，必填
+    deceleration: 0.006, //default 0.006
+    noOutOfBounds: true, //optional flag which allow to be out of bounds, default: false
+    noBounce: true, //switch of bounce. Default: false. Optional
+    wheel: true,    //the property about 3D. Default: false. Optional
+    slide: true,    //the property about inertance. Default: false. Optional
+    loop: true,     //switch of loop. Default: false. Optional
+    step: 200,      //the step at each slide. Optional
+    name: 'mscroll',    //the name of your mobilescroll instance. Optional
+    vertical: true,     //whether the direction is vertical. Default: false
+    bounceThreshold: 0.5,   //the threshod of bounce. Default: 0.5
+    min: -100,  //the min value of scoller can move. Required
+    max: 0     //the max value of scroll can move. Required
 })
 ```
 ```
@@ -48,48 +48,48 @@ new MobileScroll('.wrapper', //selector or dom 外层包装，可为选择器或
 
 ### slideTo
 ---
-#### 描述
-    滑动到某个模块
-#### 参数
-    i   索引
-    duration    滑动时间
+#### Description
+    slide to the block with specific index
+#### Parameters
+    i   index
+    duration    slide duration
 
 
 ### getIndex
 ---
-#### 描述
-    获取当前索引
-#### 参数
-    无
+#### Description
+    get the current index
+#### Parameters
+   none
 
 ### startAutoPlay
 ---
-#### 描述
-    开启自动播放
-#### 参数
-    无
+#### Description
+    open the auto-play mode
+#### Parameters
+    none
 
 ### stopAutoPlay
 ---
-#### 描述
-    停止自动播放
-#### 参数
-    无
+#### Description
+    close the auto-play mode
+#### Parameters
+    none
     
 ### pause
 ---
-#### 描述
-    暂停自动播放
-#### 参数
-    无
+#### Description
+    pause auto-play
+#### Parameters
+    none
 
     
 ### destory
 ---
-#### 描述
-    销毁mobilescroll
-#### 参数
-    无
+#### Description
+    destory the mobilescroll instance
+#### Parameters
+    none
 
 ---
 ### 

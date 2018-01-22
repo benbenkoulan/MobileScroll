@@ -1,4 +1,5 @@
 import { setTransform, setDuration } from './dom'
+import { cancelAnimationFrame } from './raf'
 
 function preventDefault(fn, context){
 	return function(e){
@@ -26,6 +27,7 @@ function correct(position){
 }
 
 function start(e){
+	cancelAnimationFrame(this.tickID);
 	if(this.loop){
 		this.fixLoop();
 	}
@@ -81,7 +83,7 @@ function move(e){
 	}
 
 	var t = new Date().getTime();
-	if(t - this.startTime > 300){
+	if(t - this.startTime > this.interval){
 		this.moveStart = point['page' + this.property];
 		this.startTime = t;
 	}
@@ -110,7 +112,7 @@ function end(e){
 	var direction = moveDistance > 0 ? 1 : -1;
 	var position = this.getPosition();
 
-	if(position[this.property] < this.max && position[this.property] > this.min && dt < 300 && absMoveDistance > 100 && this.slide){
+	if(position[this.property] < this.max && position[this.property] > this.min && dt < this.interval && this.slide){
 		var v = absMoveDistance / dt;
 		let d = v * v / (2 * this.deceleration) * direction;
 		var _position = JSON.parse(JSON.stringify(position));

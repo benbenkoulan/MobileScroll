@@ -1,6 +1,6 @@
 {
   "name": "mobilescroll",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "small tool for smooth and easy touch in mobile device",
   "main": "dist/mobile-scroll.js",
   "scripts": {

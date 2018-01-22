@@ -11,8 +11,8 @@ npm install mobilescroll --save
 new MobileScroll('.wrapper', //selector or dom element of the wrapper
 {
         
-    deceleration: 0.006, //default 0.006
-    noOutOfBounds: true, //optional flag which allow to be out of bounds, default: false
+    deceleration: 0.002, //Default 0.002
+    noOutOfBounds: true, //optional flag which allow to be out of bounds, Default: false
     noBounce: true, //switch of bounce. Default: false. Optional
     wheel: true,    //the property about 3D. Default: false. Optional
     slide: true,    //the property about inertance. Default: false. Optional

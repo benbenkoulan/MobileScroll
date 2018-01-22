@@ -11,7 +11,7 @@ export default class MobileScroll extends Observer {
 		super();
 		this.wrapper = typeof el === 'string' ? document.querySelector(el) : el;
 		this.scroller = this.wrapper.children[0];
-		this.deceleration = options.deceleration || 0.006;	//参考减速度
+		this.deceleration = options.deceleration || 0.002;	//参考减速度
 
 		this.noOutOfBounds = !!options.noOutOfBounds; //不能越界
 		this.noBounce = !!options.noBounce;	//弹性效果
@@ -20,6 +20,7 @@ export default class MobileScroll extends Observer {
 		this.loop = !!options.loop;		//循环
 		this.step = options.step;
 		this.bounceThreshold = options.bounceThreshold || 0.5;	//弹性的阀值
+		this.interval = options.interval || 300;	//滑动间隔
 
 		this.name = options.name;
 
@@ -36,22 +37,24 @@ export default class MobileScroll extends Observer {
 
 	to(position, v, time, deceleration, direction){
 		var beginTime = new Date();
-		var _position = this.getPosition();
+		var startPos = this.getPosition();
 		var self = this;
-		var id;
 		var _to = function(){
 			var dt = new Date() - beginTime;
 			if(dt >= time){;
 				setPosition.call(self, position);
-				cancelAnimationFrame(id);
+				cancelAnimationFrame(self.tickID);
 				self.emit('moveEnd');
 				return;
 			}
 			let d = (v * dt - dt * dt * deceleration / 2) * direction;
-			let current = JSON.parse(JSON.stringify(_position));
-			current[self.property] += d;
-			setPosition.call(self, current);
-			id = requestAnimationFrame(_to);
+			let _startPos = JSON.parse(JSON.stringify(startPos));
+			let current = self.getPosition();
+			let delta = current[self.property] - _startPos[self.property];
+			self.emit('move', delta);
+			_startPos[self.property] += d;
+			setPosition.call(self, _startPos);
+			self.tickID = requestAnimationFrame(_to);
 		}
 		_to();
 	}

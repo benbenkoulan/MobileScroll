@@ -166,7 +166,7 @@ export function init(){
 	var self = this;
 	var transitionHandler = function(e){
 		if(e.target === self.scroller){
-			self.emit('moveEnd');
+			self.emit('end');
 		}
 	}
 	this.scroller.addEventListener('transitionend', transitionHandler);

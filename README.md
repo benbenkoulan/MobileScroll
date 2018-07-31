@@ -95,12 +95,12 @@ new MobileScroll('.wrapper', //selector or dom element of the wrapper
 ### 
 ### events
 
-#### moveStart
+#### start
 #### move
-#### moveEnd
+#### end
 
 ```
-mobilescroll.on('moveStart', function(){
+mobilescroll.on('start', function(){
     //note that the context 'this' is point to mobilescroll
 })
 ```

@@ -26,7 +26,7 @@ function correct(position){
 	checkMaxMin.call(this, position);
 }
 
-function start(e){
+const startHandler = function(e) {
 	cancelAnimationFrame(this.tickID);
 	if(this.loop){
 		this.fixLoop();
@@ -51,7 +51,7 @@ function start(e){
 	this.emit('start');
 }
 
-function move(e){
+const moveHandler = function(e) {
 	if(!this.isStart) return;
 	
 	var point = e.touches[0];
@@ -100,7 +100,7 @@ function move(e){
 	}
 }
 
-function end(e){
+const endHandler = function(e) {
 	if(!this.isStart || this.isLocked) return;
 	var current = e.changedTouches[0]['page' + this.property];
 
@@ -140,6 +140,12 @@ function end(e){
 	this.start = this.moveStart = 0;
 }
 
+const transitionHandler = function(e) {
+	if(e.target === self.scroller){
+		this.emit('end');
+	}
+}
+
 export function init(){
 	this.items = [].slice.call(this.scroller.children);
 	this.itemLength = this.items.length;
@@ -155,22 +161,18 @@ export function init(){
 		this.slideTo();
 	}
 
-	this.startHandler = start.bind(this);
-	this.moveHandler = preventDefault(move, this);
-	this.endHandler = end.bind(this);
 
+	this.startHandler = startHandler.bind(this);
+	this.moveHandler = preventDefault(moveHandler, this);
+	this.endHandler = endHandler.bind(this);
+	this.transitionHandler = transitionHandler.bind(this);
 	this.wrapper.addEventListener('touchstart', this.startHandler);
 	this.wrapper.addEventListener('touchmove', this.moveHandler, { passive: false });
 	this.wrapper.addEventListener('touchend', this.endHandler);
 
-	var self = this;
-	var transitionHandler = function(e){
-		if(e.target === self.scroller){
-			self.emit('end');
-		}
-	}
-	this.scroller.addEventListener('transitionend', transitionHandler);
-	this.scroller.addEventListener('webkitTransitionEnd', transitionHandler);
+	
+	this.scroller.addEventListener('transitionend', this.transitionHandler);
+	this.scroller.addEventListener('webkitTransitionEnd', this.transitionHandler);
 }
 
 export function setPosition(position, duration = 0){

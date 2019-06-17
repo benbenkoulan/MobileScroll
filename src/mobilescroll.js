@@ -1,7 +1,7 @@
 'use strict'
 import Observer from './observer'
 import { getTransform } from './dom'
-import { init, setPosition } from './func'
+import { init, setPosition, } from './func'
 import { requestAnimationFrame, cancelAnimationFrame } from './raf'
 
 const properties = ['deceleration', 'noBounce', 'wheel', 'slide', 'loop', 'noOutOfBounds', 'step', 'name', 'vertical', 'max', 'min']
@@ -36,25 +36,24 @@ export default class MobileScroll extends Observer {
 	}
 
 	to(position, v, time, deceleration, direction){
-		var beginTime = new Date();
-		var startPos = this.getPosition();
-		var self = this;
-		var _to = function(){
-			var dt = new Date() - beginTime;
-			if(dt >= time){;
-				setPosition.call(self, position);
-				cancelAnimationFrame(self.tickID);
-				self.emit('moveEnd');
+		const beginTime = new Date();
+		const startPos = this.getPosition();
+		const _to = () => {
+			const dt = new Date() - beginTime;
+			if(dt >= time || !time){;
+				setPosition.call(this, position);
+				cancelAnimationFrame(this.tickID);
+				this.emit('end');
 				return;
 			}
-			let d = (v * dt - dt * dt * deceleration / 2) * direction;
-			let _startPos = JSON.parse(JSON.stringify(startPos));
-			let current = self.getPosition();
-			let delta = current[self.property] - _startPos[self.property];
-			self.emit('move', delta);
-			_startPos[self.property] += d;
-			setPosition.call(self, _startPos);
-			self.tickID = requestAnimationFrame(_to);
+			const d = (v * dt - dt * dt * deceleration / 2) * direction;
+			const _startPos = JSON.parse(JSON.stringify(startPos));
+			const current = this.getPosition();
+			const delta = current[this.property] - _startPos[this.property];
+			this.emit('move', delta);
+			_startPos[this.property] += d;
+			setPosition.call(this, _startPos);
+			this.tickID = requestAnimationFrame(_to);
 		}
 		_to();
 	}
@@ -64,27 +63,41 @@ export default class MobileScroll extends Observer {
 	}
 
 	getComputedPosition(d){
-		var position = this.getPosition();
+		const position = this.getPosition();
 		position[this.property] += d;
 		return position;
 	}
 
 	slideTo(i, duration){
 		if(i === undefined || !this.step) return;
-		var d = -this.step * i;
-		var position = this.getPosition();
+		const d = -this.step * i;
+		const position = this.getPosition();
+		const _d = position[this.property];
 		position[this.property] = d;
 		setPosition.call(this, position, duration);
+		this.emit('move', d - _d);
+	}
+
+	moveTo(d, duration = 0) {
+		const position = this.getPosition();
+		const _d = position[this.property];
+		position[this.property] = d;
+		setPosition.call(this, position, duration);
+		this.emit('move', d - _d);
+	}
+
+	stopMove() {
+		cancelAnimationFrame(this.tickID);
 	}
 
 	getIndex(){
 		if(!this.step) return;
-		var position = this.getPosition();
+		const position = this.getPosition();
 		return Math.round(Math.abs(position[this.property]) / this.step);
 	}
 
 	fixLoop(){
-		var index = this.getIndex();
+		const index = this.getIndex();
 		if(index === 0){
 			this.slideTo(this.itemLength - 2);
 		} else if(index === this.itemLength - 1){
@@ -92,22 +105,21 @@ export default class MobileScroll extends Observer {
 		}
 	}
 
-	startAutoPlay(interval, speed, direction = 1){
+	startAutoPlay(interval = 0, speed, direction = 1){
 		if(interval <= speed){
 			console.log('error:---interval need to be greater than speed---');
 			return;
 		}
-		var self = this;
-		this.autoPlayID = setInterval(function(){
-			if(self.loop) self.fixLoop();
-			if(!self.isTouchStart)self.slideTo(self.getIndex() + direction, speed);
-		}, interval)
+		this.autoPlayID = setInterval(() => {
+			if(this.loop) this.fixLoop();
+			if(!this.isTouchStart) this.slideTo(this.getIndex() + direction, speed);
+		}, interval);
 	}
 
 	stopAutoPlay(){
 		if(!this.autoPlayID) return;
 		clearInterval(this.autoPlayID);
-		this.autoPlayID = undefined;
+		this.autoPlayID = null;
 	}
 
 	pause(){
@@ -121,11 +133,15 @@ export default class MobileScroll extends Observer {
 		}
 	}
 
-	destory(){
-		this.events = [];
+	destroy(){
 		this.stopAutoPlay();
 		this.wrapper.removeEventListener('touchstart', this.startHandler);
 		this.wrapper.removeEventListener('touchmove', this.moveHandler);
 		this.wrapper.removeEventListener('touchend', this.endHandler);
+		this.scroller.removeEventListener('transitionend', this.transitionHandler);
+		this.scroller.removeEventListener('webkitTransitionEnd', this.transitionHandler);
+		this.events = [];
+		this.wrapper = null;
+		this.scroller = null;
 	}
 }

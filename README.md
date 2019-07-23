@@ -8,6 +8,30 @@ npm install mobilescroll --save
 ## **Usage**
 
 ```
+<script src="mobile-scroll.js"></script>
+
+or
+import MobileScroll from 'mobilescroll';
+
+when your project is client-side render, you can use mobilescroll as above, but if your project is server-side render, you may use it as follows.
+
+import('mobilescroll').then(({ defalut: MobileScroll }) => {
+    // ......
+});
+
+```
+```
+<div class="wrapper">
+    <div class="scroller">
+        <p class="item"></p>
+        <p class="item"></p>
+        <p class="item"></p>
+        <p class="item"></p>
+    </div>
+</div>
+```
+
+```
 new MobileScroll('.wrapper', //selector or dom element of the wrapper
 {
         
@@ -25,21 +49,6 @@ new MobileScroll('.wrapper', //selector or dom element of the wrapper
     max: 0     //the max value of scroll can move. Required
 })
 ```
-```
-<script src="mobile-scroll.js"></script>
-
-```
-```
-<div class="wrapper">
-    <div class="scroller">
-        <p class="item"></p>
-        <p class="item"></p>
-        <p class="item"></p>
-        <p class="item"></p>
-    </div>
-</div>
-```
-
 
 
 ## **API**
@@ -100,7 +109,8 @@ new MobileScroll('.wrapper', //selector or dom element of the wrapper
 #### end
 
 ```
-mobilescroll.on('start', function(){
-    //note that the context 'this' is point to mobilescroll
-})
+ms.on('start', function(){
+    // note that the context 'this' is point to MobileScroll instance "ms"
+    // or you can give a arrow function an access the instance by "ms" directly
+});
 ```

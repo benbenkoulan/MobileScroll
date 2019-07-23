@@ -8,7 +8,7 @@ const config = {
 	entry: resolve('src/mobilescroll.js'),
 	output: {
 		path: resolve('dist'),
-		filename: isMini ? 'mobile.scroll.mini.js' : 'mobilescroll.js',
+		filename: isMini ? 'mobile.scroll.mini.js' : 'mobile.scroll.js',
 		library: 'MobileScroll',
 		libraryExport: 'default',
       	libraryTarget: 'umd',

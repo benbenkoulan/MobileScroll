@@ -2,7 +2,7 @@
   "name": "mobilescroll",
   "version": "1.5.1",
   "description": "small tool for smooth and easy touch in mobile device",
-  "main": "dist/mobile-scroll.js",
+  "main": "dist/mobile.scroll.js",
   "module": "src/mobilescroll.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

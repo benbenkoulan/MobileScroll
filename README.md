@@ -84,10 +84,10 @@ new MobileScroll('.wrapper', //selector or dom element of the wrapper
     none
 
     
-### destory
+### destroy
 ---
 #### Description
-    destory the mobilescroll instance
+    destroy the mobilescroll instance
 #### Parameters
     none
 

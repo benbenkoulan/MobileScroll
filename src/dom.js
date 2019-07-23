@@ -1,16 +1,16 @@
 export function setTransform(dom, value){
-	let style = dom.style;
+	const style = dom.style;
 	style.webkitTransform = style.MsTransform = style.msTransform = style.MozTransform = style.OTransform = style.transform = value;
 }
 
 export function setDuration(dom, value){
-	let style = dom.style;
+	const style = dom.style;
 	style.transitionDuration = value;
 }
 
 export function getTransform(dom){
 	let curTransform, transformMatrix, matrix;
-	let curStyle = window.getComputedStyle(dom, null);
+	const curStyle = window.getComputedStyle(dom, null);
 	if(window.WebKitCSSMatrix){
 		curTransform = curStyle.transform || curStyle.webkitTransform;
 		if (curTransform.split(',').length > 6) {

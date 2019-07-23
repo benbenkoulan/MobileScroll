@@ -1,9 +1,11 @@
 const path = require('path')
 
+const resolve = dir => path.join(__dirname, './', dir);
+
 module.exports = {
-	entry: './index.js',
+	entry: resolve('src/mobilescroll.js'),
 	output: {
-		path: path.resolve(__dirname, './dist'),
+		path: resolve('dist'),
 		filename: 'mobile-scroll.js',
 		library: 'MobileScroll',
       	libraryTarget: 'umd',

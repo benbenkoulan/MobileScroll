@@ -1,24 +1,26 @@
 export default class Observer {
 	constructor(){
-		this.events = [];
+		this.events = new Map();
 	}
 
 	on(type, fn, context = this){
-		var e = this.events.find(event => event.type === type);
-		if(e) e = { type, fn };
-		else this.events.push({ type, fn, context });
+		this.events.set(type, {
+			fn,
+			context,
+		});
 		return this;
 	}
 
 	off(type){
-		var index = this.events.findIndex(event => event.type === type);
-		if(index < 0) return;
-		else this.events.splice(index, 1);
+		this.events.remove(type);
 		return this;
 	}
 
 	emit(type){
-		var e = this.events.find(event => event.type === type);
-		if(e) e.fn.apply(e.context, [].slice.call(arguments, 1));
+		if (this.events.has(type)) {
+			const event = this.events.get(type);
+			const args = Array.from(arguments).slice(1);
+			event.fn.apply(event.context, args);
+		}
 	}
 }

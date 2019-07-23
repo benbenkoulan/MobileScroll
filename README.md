@@ -17,7 +17,7 @@ import MobileScroll from 'mobilescroll';
 when your project is client-side render, you can use mobilescroll as above, 
 but if your project is server-side render, you may use it as follows.
 
-import('mobilescroll').then(({ defalut: MobileScroll }) => {
+import('mobilescroll').then(({ default: MobileScroll }) => {
     // ......
 });
 

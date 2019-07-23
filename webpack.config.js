@@ -1,13 +1,16 @@
-const path = require('path')
-
+const path = require('path');
+const webpack = require('webpack');
 const resolve = dir => path.join(__dirname, './', dir);
 
-module.exports = {
+const isMini = process.env.type === 'mini';
+
+const config = {
 	entry: resolve('src/mobilescroll.js'),
 	output: {
 		path: resolve('dist'),
-		filename: 'mobile-scroll.js',
+		filename: isMini ? 'mobile.scroll.mini.js' : 'mobilescroll.js',
 		library: 'MobileScroll',
+		libraryExport: 'default',
       	libraryTarget: 'umd',
       	umdNamedDefine: true
 	},
@@ -20,5 +23,21 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.js']
-	}
+	},
+	plugins: []
 }
+
+if (isMini) {
+	config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+		comments: false,
+		compress: {
+			warnings: false,
+			keep_fargs: false,
+			pure_funcs: [ 'console.log' ],
+			toplevel: true
+			
+		}
+	}));
+}
+
+module.exports = config;

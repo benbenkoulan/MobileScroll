@@ -8,12 +8,14 @@ npm install mobilescroll --save
 ## **Usage**
 
 ```
-<script src="mobile-scroll.js"></script>
+<script src="mobile.scroll.mini.js"></script>
 
 or
+
 import MobileScroll from 'mobilescroll';
 
-when your project is client-side render, you can use mobilescroll as above, but if your project is server-side render, you may use it as follows.
+when your project is client-side render, you can use mobilescroll as above, 
+but if your project is server-side render, you may use it as follows.
 
 import('mobilescroll').then(({ defalut: MobileScroll }) => {
     // ......

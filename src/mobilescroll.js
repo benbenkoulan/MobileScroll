@@ -2,7 +2,7 @@
 import Observer from './observer';
 import { setTransform, getTransform, setDuration, } from './dom';
 import properties, { to, init, correct, checkStep, setPosition, checkMaxMin, } from './properties';
-import { deepClone, preventTouchDefault, requestAnimationFrame, cancelAnimationFrame, } from './helpers';
+import deepClone, { preventTouchDefault, requestAnimationFrame, cancelAnimationFrame, } from './helpers';
 
 export default class MobileScroll extends Observer {
 	constructor(el, options){

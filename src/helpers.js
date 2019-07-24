@@ -5,9 +5,13 @@ export const preventTouchDefault = function(fn, context) {
 		}
 		fn.call(context, e);
 	}
-}
+} 
 
-export const deepClone = (obj, hash = new WeakMap()) => {
+export const requestAnimationFrame = (g => (g.requestAnimationFrame || g.webkitRequestAnimationFrame || g.mozRequestAnimationFrame || (cb => g.setInterval(cb, cb.interval || 1000 / 16))))(global || window);
+
+export const cancelAnimationFrame = (g => (g.cancelAnimationFrame || g.webkitCancelAnimationFrame || g.mozCancelAnimationFrame || (id => g.clearInterval(id))))(global || window);
+
+export default (obj, hash = new WeakMap()) => {
 	if (obj instanceof Date) return new Date(obj);
 	if (obj instanceof RegExp) return new RegExp(obj);
 	if (obj === null || typeof obj !== 'object') return obj;
@@ -22,10 +26,4 @@ export const deepClone = (obj, hash = new WeakMap()) => {
 		}
 	}
 	return o;
-}
-
-export const requestAnimationFrame = (g => (g.requestAnimationFrame || g.webkitRequestAnimationFrame || g.mozRequestAnimationFrame || (cb => g.setInterval(cb, cb.interval || 1000 / 16))))(global || window);
-
-export const cancelAnimationFrame = (g => (g.cancelAnimationFrame || g.webkitCancelAnimationFrame || g.mozCancelAnimationFrame || (id => g.clearInterval(id))))(global || window);
-
-export default {};
+};

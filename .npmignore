@@ -1,4 +1,4 @@
 webpack.config.js
 node_modules/
 *.log
-index.js
+src/
